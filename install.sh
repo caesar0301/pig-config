@@ -3,18 +3,8 @@
 ## (Tested on Ubuntu 14.04)
 ## Author: chenxm
 ## Email: chenxm35@gmail.com
+
 # set -e
-
-##############################################################################
-##
-##  Start up script for Ubuntu
-##
-##############################################################################
-
-LOCAL_PIG=/home/`whoami`/.pig
-DEFAULT_PIG_LIBS=$LOCAL_PIG/libs
-PIGBOOTUP=/home/`whoami`/.pigbootup
-THISHOME=`dirname $0`
 
 echo "Installing required libs to $DEFAULT_PIG_LIBS ... "
 while true; do
@@ -26,7 +16,10 @@ while true; do
     esac
 done
 
-## Make installed folders
+LOCAL_PIG=$HOME/.pig
+DEFAULT_PIG_LIBS=$LOCAL_PIG/libs
+PIGBOOTUP=$HOME/.pigbootup
+THISHOME=`dirname $0`
 mkdir -p $DEFAULT_PIG_LIBS
 
 ## Install piggybank.
@@ -89,8 +82,8 @@ fi
 
 ## Update configurations
 touch $PIGBOOTUP
-echo "/* This file is generated automatically to define preloaded" > $PIGBOOTUP
-echo "commands of Pig. */" >> $PIGBOOTUP
+echo "" >> $PIGBOOTUP
+echo "/*These are generated automatically to define preloaded commands of Pig.*/" >> $PIGBOOTUP
 echo "" >> $PIGBOOTUP
 ## echo "%default PIG_LIBS '/home/"`whoami`"/.pig/libs';" >> $PIGBOOTUP
 for file in `ls $DEFAULT_PIG_LIBS/*.jar`; do
